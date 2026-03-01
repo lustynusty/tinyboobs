@@ -22,6 +22,23 @@ load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_IDS = [int(id.strip()) for id in os.getenv("ADMIN_IDS", "").split(",") if id.strip()]
 
+# ====== ДОБАВЬТЕ ЭТОТ БЛОК ДЛЯ ОТЛАДКИ ======
+print("=" * 50)
+print("🔍 ДИАГНОСТИКА ПЕРЕМЕННЫХ:")
+print(f"BOT_TOKEN получен: {'✅ ДА' if BOT_TOKEN else '❌ НЕТ'}")
+if BOT_TOKEN:
+    print(f"Длина токена: {len(BOT_TOKEN)} символов")
+    print(f"Первые 10 символов: {BOT_TOKEN[:10]}...")
+    print(f"Последние 5 символов: ...{BOT_TOKEN[-5:]}")
+else:
+    print("❌ BOT_TOKEN не найден!")
+    print("Все переменные окружения:")
+    for key, value in os.environ.items():
+        if "TOKEN" in key or "BOT" in key:  # Покажем только похожие переменные
+            print(f"  {key}: {value[:10]}...")
+print("=" * 50)
+# ====== КОНЕЦ БЛОКА ОТЛАДКИ ======
+
 # Настройка логирования
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
